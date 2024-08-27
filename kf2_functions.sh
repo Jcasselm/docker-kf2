@@ -22,25 +22,36 @@ function require_ruby() {
 }
 
 function require_kf2() {
-    # Download kf2
+    # Check if Steam credentials are provided
+    if [[ -z "$STEAM_USERNAME" || -z "$STEAM_PASSWORD" ]]; then
+        echo "Error: Steam username and password are required."
+        exit 1
+    fi
+
+    # Download KF2 if not already present
     [[ -f "${HOME}/kf2server/Binaries/Win64/KFServer.exe" ]] || ( \
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
+            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
             +app_update 232130 validate \
-            +login anonymous  \
             +exit
     )
 }
 
 function update() {
+    if [[ -z "$STEAM_USERNAME" || -z "$STEAM_PASSWORD" ]]; then
+        echo "Error: Steam username and password are required."
+        exit 1
+    fi
+
     rm -rf "${HOME}/steam/steamapps"
     (
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
+            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
             +app_update 232130 "$@" \
-            +login anonymous \
             +exit
     )
 }
