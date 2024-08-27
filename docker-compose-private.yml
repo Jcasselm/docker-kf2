@@ -3,7 +3,7 @@ version: '2'
 services:
     kf2:
         container_name: kf2_private
-        image: dwurf/docker-kf2:latest
+        image: jcasselm/docker-kf2:latest
         # Uncomment this to skip auto-update
         #command: update validate
         #command: update -beta preview validate
