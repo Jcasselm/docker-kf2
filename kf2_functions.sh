@@ -33,7 +33,8 @@ function require_kf2() {
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
-            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+            #            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+            +login anonymous \
             +app_update 232130 validate \
             +exit
     )
@@ -50,7 +51,8 @@ function update() {
         cd "${HOME}/steam"
         ./steamcmd.sh \
             +force_install_dir "${HOME}/kf2server" \
-            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+#            +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+            +login anonymous \
             +app_update 232130 "$@" \
             +exit
     )
